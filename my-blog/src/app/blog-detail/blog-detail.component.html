@@ -1,0 +1,22 @@
+
+<div style="width:70%;margin:auto;" *ngIf="ready">
+    <h3 style="text-align: center;">Dettaglio Blog</h3>
+    <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{blog.titoloArticolo}}</mat-card-title>
+          <mat-card-subtitle>{{blog.createdAt | date:'longDate'}}</mat-card-subtitle>
+        </mat-card-header>
+        <div [ngStyle]="{'width': blog.immagineCopertina.width + 'px'}" style="margin : auto">
+            <img mat-card-image src="{{blog.immagineCopertina.url}}" alt="" height="{{blog.immagineCopertina.height}}" width="{{blog.immagineCopertina.width}}">
+        </div>
+        
+        <mat-card-content>
+          <p>{{blog.body}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="accent" (click)="goToBlogList($event)">Torna alla lista dei blog</button>
+        </mat-card-actions>
+      </mat-card>
+</div>
+
+
