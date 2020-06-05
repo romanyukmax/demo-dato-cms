@@ -1,17 +1,17 @@
 <form class="blog-form-container" (ngSubmit)="onSubmit()" #blogForm="ngForm" >
-    <h3>Crea il tuo nuovo Blog</h3>
+    <h3>Create your new blog</h3>
     <mat-form-field class="blog-form-field-full">
-      <mat-label>Titolo del Blog</mat-label>
+      <mat-label>Blog's title</mat-label>
       <input [(ngModel)]="model.titoloArticolo" required name="titoloArticolo" matInput placeholder="Titolo">
     </mat-form-field>
   
     <mat-form-field class="blog-form-field-full">
-      <mat-label>Il contenuto del blog</mat-label>
+      <mat-label>Blog's content</mat-label>
       <textarea [(ngModel)]="model.body" required name="body" matInput [matTextareaAutosize]  placeholder="I miei pensieri..." style="min-height: 100px;"></textarea>
     </mat-form-field>
     <div style="display:flex;justify-content: space-between;">
-        <button mat-raised-button color="accent" (click)="goToBlogList($event)">Torna alla lista dei blog</button>
-        <button type="submit" mat-raised-button color="primary" [disabled]="!blogForm.form.valid">Crea Blog</button>
+        <button mat-raised-button color="accent" (click)="goToBlogList($event)">Back to blog's list</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="!blogForm.form.valid">Create blog</button>
     </div>
     <!-- {{diagnostic}} -->
 </form>
