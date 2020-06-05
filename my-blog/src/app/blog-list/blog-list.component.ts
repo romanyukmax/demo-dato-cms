@@ -28,6 +28,7 @@ type Response = {
   templateUrl: './blog-list.component.html',
   styleUrls: ['./blog-list.component.less']
 })
+
 export class BlogListComponent implements OnInit {
   blogs: Blog[];
   loading = true;

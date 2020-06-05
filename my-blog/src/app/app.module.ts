@@ -17,6 +17,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule }   from '@angular/forms';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 
@@ -43,8 +44,8 @@ import { FormsModule }   from '@angular/forms';
     FormsModule,
     MarkdownModule.forRoot(),
     HttpClientModule,
-    MarkdownModule.forRoot({ loader: HttpClient })
-    
+    MarkdownModule.forRoot({ loader: HttpClient }),
+    MatToolbarModule
   ],
   // exports : [
    
