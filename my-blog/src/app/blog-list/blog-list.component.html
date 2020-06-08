@@ -10,7 +10,7 @@
           <mat-card-subtitle>{{blog.createdAt | date:'longDate'}}</mat-card-subtitle>
         <!-- </mat-card-header> -->
         <div style="display:flex; align-items: center; justify-content: center;height: 300px;">
-          <img mat-card-image src="{{blog.immagineCopertina.url}}" alt="{{blog.titoloArticolo}}" style="max-height:300px">
+            <img mat-card-image src="{{blog.immagineCopertina != null ? blog.immagineCopertina.url : 'assets/img/def_bck.jpg'}}" alt="{{blog.titoloArticolo}}" style="max-height:300px">  
         </div>
         <mat-card-actions>
           <button mat-raised-button color="primary" (click)="goToDetail($event, blog)">Show details</button>

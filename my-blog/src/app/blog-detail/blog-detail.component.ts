@@ -6,14 +6,30 @@ import {Blog} from '../model/Blog'
 const getBlogById = gql`
 query getBlogById($blogId: ItemId) {
   articoloDiBlog(filter: {id: {eq: $blogId}}) {
+    id
     titoloArticolo
     body
     createdAt
+    updatedAt
     mostraCopertina
     immagineCopertina {
       url,
       height,
       width
+    }
+    attachment{
+      url
+      filename
+      format
+      title
+    }
+    articoliCorrelati {
+      id
+      titoloArticolo
+      createdAt
+      immagineCopertina {
+        url
+      }
     }
   }
 }
@@ -36,26 +52,38 @@ export class BlogDetailComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id');
-    console.log("id " + id);
+
+    this.route.params.subscribe(params => {
+    
+      let id = this.route.snapshot.paramMap.get('id');
+      console.log("id " + id);
+      this.apollo
+        .watchQuery<Response>({
+          query: getBlogById,
+          variables: {
+            blogId: id
+          },
+        })
+        .valueChanges.subscribe(result => {
+          console.log(result.data.articoloDiBlog);
+          this.blog = result.data.articoloDiBlog;
+          this.ready = true;
+  
+        });
+        
+     });
+
    
+  }
 
-    this.apollo
-      .watchQuery<Response>({
-        query: getBlogById,
-        variables: {
-          blogId: id
-        },
-      })
-      .valueChanges.subscribe(result => {
-        console.log(result.data.articoloDiBlog);
-        this.blog = result.data.articoloDiBlog;
-        this.ready = true;
-
-      });
+  goToDetail(event:any, blog:Blog){
+    this.router.navigate(['/detail', { id: blog.id }]);
+    //this.ngOnInit();
   }
 
   goToBlogList(event:any){
     this.router.navigate(['/home']);
+   
   }
+
 }

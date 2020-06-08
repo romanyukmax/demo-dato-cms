@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {MatListModule} from '@angular/material/list';
 
 import {Blog} from '../model/Blog'
+import { UrlResolver } from '@angular/compiler';
 
 const allBlogsQuery = gql ` query getArticoliDESC {
   allArticoloDiBlogs(orderBy: _createdAt_DESC) {

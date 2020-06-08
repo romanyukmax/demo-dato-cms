@@ -1,19 +1,65 @@
 
-<div style="width:70%;margin:auto;" *ngIf="ready">
-    <h3 style="text-align: center;">Dettaglio Blog</h3>
+<div style="width:70%;margin:auto; padding-top: 20px; padding-bottom: 20px;" *ngIf="ready">
     <mat-card>
         <mat-card-header>
           <mat-card-title>{{blog.titoloArticolo}}</mat-card-title>
           <mat-card-subtitle>{{blog.createdAt | date:'longDate'}}</mat-card-subtitle>
         </mat-card-header>
-        <div [ngStyle]="{'max-width': blog.immagineCopertina.width + 'px'}" style="margin : auto">
+        <div *ngIf="blog.immagineCopertina != null">
+          <div [ngStyle]="{'max-width': blog.immagineCopertina.width + 'px'}" style="margin : auto">
             <img mat-card-image src="{{blog.immagineCopertina.url}}">
+          </div>
         </div>
         
         <mat-card-content>
-          <markdown ngPreserveWhitespaces>{{blog.body}}</markdown>
+          <!-- <markdown  ngPreserveWhitespaces >{{blog.body}}</markdown> -->
+          <markdown [data]="blog.body" ngPreserveWhitespaces></markdown>
+          <!-- <div markdown [(data)]="body" (ready)="onReady(blog.body)"> {{body}}</div> -->
+         
           <!-- <p>{{blog.body}}</p> -->
         </mat-card-content>
+        <mat-accordion class="example-headers-align" *ngIf="blog.attachment && blog.attachment.length > 0">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Attachments
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          
+              <mat-grid-list cols="3" gutterSize="5px" >
+                <mat-grid-tile *ngFor="let item of blog.attachment">
+                  <a href="{{item.url}}" target="_blank" class="attachment-style">
+                    <div *ngIf="item.format==='pdf'">
+                      <span class="material-icons big-icon">
+                        picture_as_pdf
+                        </span>
+                    </div>
+                    <div *ngIf="item.format==='png' || item.format==='jpg' || item.format==='jpeg'" style="height:145px;display:flex; align-items: center;">
+                      <img mat-card-image src="{{item.url}}">
+                    </div>
+                    <div *ngIf="item.format!=='png' && item.format!=='jpg' && item.format!=='jpeg' && item.format!=='pdf'">
+                      <span class="material-icons big-icon">attach_file</span>
+                    </div>
+                    <div>{{item.filename}}</div>
+                </a>
+                </mat-grid-tile>
+              </mat-grid-list>
+              
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card>
+      <mat-card style="margin-top:20px" *ngIf="blog.articoliCorrelati && blog.articoliCorrelati.length > 0">
+        <h3>Related Articles</h3>
+        <mat-nav-list *ngFor="let articolo of blog.articoliCorrelati">
+          <a mat-list-item href="javascript:void(0)" (click)="goToDetail($event, articolo)"  role="listitem">
+            <img matListAvatar src="{{articolo.immagineCopertina != null ? articolo.immagineCopertina.url : 'assets/img/def_bck.jpg'}}" alt="{{articolo.titoloArticolo}}">
+            <h3 matLine> {{articolo.titoloArticolo}} </h3>
+            <p matLine>
+              <span>{{articolo.createdAt}}</span>
+            </p>
+  
+          </a>
+        </mat-nav-list>
       </mat-card>
 </div>
 <button class="sticky-bottom-btn" mat-raised-button  color="primary" (click)="goToBlogList($event)">
