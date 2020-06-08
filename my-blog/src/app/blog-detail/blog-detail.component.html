@@ -14,10 +14,13 @@
           <markdown ngPreserveWhitespaces>{{blog.body}}</markdown>
           <!-- <p>{{blog.body}}</p> -->
         </mat-card-content>
-        <mat-card-actions>
+        <!-- <mat-card-actions>
             <button mat-raised-button color="accent" (click)="goToBlogList($event)">Torna alla lista dei blog</button>
-        </mat-card-actions>
+        </mat-card-actions> -->
       </mat-card>
 </div>
+<button class="sticky-bottom-btn" mat-raised-button  color="primary" (click)="goToBlogList($event)">
+  <mat-icon>keyboard_arrow_left</mat-icon> Indietro
+</button>
 
 

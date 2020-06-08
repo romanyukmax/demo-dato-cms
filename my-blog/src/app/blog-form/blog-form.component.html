@@ -10,9 +10,10 @@
       <textarea [(ngModel)]="model.body" required name="body" matInput [matTextareaAutosize]  placeholder="I miei pensieri..." style="min-height: 100px;"></textarea>
     </mat-form-field>
     <div style="display:flex;justify-content: space-between;">
-        <button mat-raised-button color="accent" (click)="goToBlogList($event)">Torna alla lista dei blog</button>
         <button type="submit" mat-raised-button color="primary" [disabled]="!blogForm.form.valid">Crea Blog</button>
     </div>
     <!-- {{diagnostic}} -->
 </form>
-  
+<button class="sticky-bottom-btn" mat-raised-button  color="primary" (click)="goToBlogList($event)">
+  <mat-icon>keyboard_arrow_left</mat-icon> Indietro
+</button>

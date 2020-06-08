@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BlogListComponent } from './blog-list/blog-list.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
-import { BlogFormComponent } from './blog-form/blog-form.component';
+import { BlogFormComponent,SnackBarBlogComponent } from './blog-form/blog-form.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {MatListModule} from '@angular/material/list';
@@ -18,6 +18,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule }   from '@angular/forms';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -27,8 +28,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     AppComponent,
     BlogListComponent,
     BlogDetailComponent,
-    BlogFormComponent
+    BlogFormComponent,
+    SnackBarBlogComponent
   ],
+  entryComponents: [SnackBarBlogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -45,7 +48,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MarkdownModule.forRoot(),
     HttpClientModule,
     MarkdownModule.forRoot({ loader: HttpClient }),
-    MatToolbarModule
+    MatToolbarModule,
+    MatSnackBarModule
   ],
   // exports : [
    

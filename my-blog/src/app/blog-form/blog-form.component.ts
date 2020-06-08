@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import {Blog} from '../model/Blog'
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { SiteClient } from 'datocms-client';
 
 @Component({
@@ -11,9 +12,11 @@ import { SiteClient } from 'datocms-client';
 export class BlogFormComponent implements OnInit {
   client: SiteClient = new SiteClient('b26afeae0277286f8059752d5b4b5c'); 
   model: Blog = new Blog();
+  durationInSeconds = 5;
+
 
   constructor(private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -31,7 +34,8 @@ export class BlogFormComponent implements OnInit {
     };
     console.log("articoloNuovo: " + articoloNuovo);
     this.client.items.create(articoloNuovo);
-    alert("Articolo creato correttamente.");
+    this.openSnackBar();
+    //alert("Articolo creato correttamente.");
   }
 
   get diagnostic() { return JSON.stringify(this.model); }
@@ -39,5 +43,17 @@ export class BlogFormComponent implements OnInit {
   goToBlogList(event:any){
     this.router.navigate(['/home']);
   }
+  openSnackBar() {
+    this._snackBar.openFromComponent(SnackBarBlogComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
 
 }
+
+@Component({
+  selector: 'snack-bar-blog',
+  templateUrl: 'snack-bar-blog.html',
+  styles: [` `],
+})
+export class SnackBarBlogComponent {}
